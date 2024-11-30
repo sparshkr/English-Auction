@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
       {
         protocol:"https",
         hostname:"api.auctionx.dev"
+      },
+      {
+        protocol:"https",
+        hostname:"gvauction.auctionx.dev"
       }
     ]
   }

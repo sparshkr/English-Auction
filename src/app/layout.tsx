@@ -2,15 +2,18 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+// Loading local fonts with additional font-display
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: "swap", // Ensures text remains visible while loading
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: "swap", // Ensures text remains visible while loading
 });
 
 export const metadata: Metadata = {
@@ -24,7 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="A Next.js project" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -25,7 +25,7 @@ const Card: React.FC<CardProps> = ({ AuctionName, progress }) => {
           <Image
             src="https://api.auctionx.dev/assets/uploads/1730104758278-cropped-image-1730104757147.jpg"
             alt="Product Img"
-            width={369.17}
+            width={339.17}
             height={369.49}
             className="object-cover w-full h-full"
           />

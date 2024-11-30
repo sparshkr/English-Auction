@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       {
         protocol:"https",
         hostname:"gvauction.auctionx.dev"
+      },
+      {
+        protocol:"https",
+        hostname:"s3-alpha-sig.figma.com"
       }
     ]
   }

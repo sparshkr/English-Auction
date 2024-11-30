@@ -44,14 +44,16 @@ export default function Home() {
 
         <div className="relative z-10 w-full text-white flex justify-center items-center flex-wrap gap-4 sm:gap-5 flex-col pt-4 mb-2">
           <div className="flex flex-col sm:flex-row justify-center items-center transition-all duration-300 w-full relative gap-6">
-            <div className={`transition-all duration-300 relative z-20`}>
+            <div
+              className={`transition-all duration-300 relative z-20 flex flex-shrink`}
+            >
               <Card AuctionName={AuctionName} progress={70} />
             </div>
 
             {/* Updated Bid List with Tailwind Thin Scrollbar */}
             {/* Updated Bid List with Thinner Design */}
             <div
-              className={`relative sm:relative right-0 top-0 sm:top-auto mt-4 sm:mt-0 max-h-[300px] overflow-x-auto transition-all duration-500 bg-[#0C0D29]/10 backdrop-blur-sm p-2 rounded-lg z-10 opacity-100 w-full lg:w-[100px] flex flex-row flex-wrap  gap-1 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent`}
+              className={`relative sm:relative right-0 top-0 sm:top-auto mt-4 sm:mt-0 max-h-[300px] overflow-x-auto transition-all duration-500 bg-[#0C0D29]/10 backdrop-blur-sm p-2 rounded-lg z-10 opacity-100 w-full lg:w-[100px] flex flex-row flex-wrap  gap-1 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent justify-center items-center`}
             >
               {bids.map((bid, index) => (
                 <div

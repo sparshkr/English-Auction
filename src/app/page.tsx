@@ -11,7 +11,7 @@ export default function Home() {
   const [bids, setBids] = useState<string[]>([]);
 
   const AuctionName = "English Auction";
-  const ProductName: string = "Nike Jordans";
+  const ProductName: string = "AirPods Pro";
   const ProductPrice: string = "1000.00";
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Home() {
             {/* Updated Bid List with Tailwind Thin Scrollbar */}
             {/* Updated Bid List with Thinner Design */}
             <div
-              className={`relative sm:relative right-0 top-0 sm:top-auto mt-4 sm:mt-0 max-h-[300px] overflow-x-auto transition-all duration-500 bg-[#0C0D29]/10 backdrop-blur-sm p-2 rounded-lg z-10 opacity-100 w-full lg:w-[100px] flex flex-row flex-wrap  gap-1 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent justify-center items-center`}
+              className={`relative sm:relative right-0 top-0 sm:top-auto mt-4 sm:mt-0 max-h-[300px] overflow-x-auto transition-all duration-500   p-2 rounded-lg z-10 opacity-100 w-full lg:w-[100px] flex flex-row flex-wrap  gap-1 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent justify-center items-center bg-transparent`}
             >
               {bids.map((bid, index) => (
                 <div

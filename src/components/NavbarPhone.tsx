@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
 
 const menuItems = [
   {
@@ -27,59 +26,66 @@ const menuItems = [
   },
 ];
 
-export default function Navbar() {
+export default function NavbarPhone() {
   const [activeItem, setActiveItem] = useState("Bid");
+  const [activePosition, setActivePosition] = useState(0);
+  const [activeWidth, setActiveWidth] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<string>("");
+
   const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updatePosition = () => {
+      const navElement = navRef.current;
+      if (navElement) {
+        const activeElement = navElement.querySelector(
+          `[data-name="${activeItem}"]`
+        ) as HTMLElement;
+        if (activeElement) {
+          const navRect = navElement.getBoundingClientRect();
+          const activeRect = activeElement.getBoundingClientRect();
+          const textElement = activeElement.querySelector(
+            ".text-ms"
+          ) as HTMLElement;
+          if (textElement) {
+            const textWidth = textElement.offsetWidth;
+            setActivePosition(
+              activeRect.left -
+                navRect.left +
+                (activeRect.width - textWidth) / 2
+            );
+            setActiveWidth(textWidth);
+          }
+        }
+      }
+    };
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+
+    return () => window.removeEventListener("resize", updatePosition);
+  }, [activeItem]);
 
   const handleMenuClick = (itemName: string) => {
     if (itemName === "How to" || itemName === "Redeem") {
-      setModalContent(itemName);
-      setIsModalOpen(true);
+      setModalContent(itemName); // Set the content for the modal
+      setIsModalOpen(true); // Open the modal
     } else {
-      setIsModalOpen(false);
+      setIsModalOpen(false); // Close the modal when clicking on other items
     }
-    setActiveItem(itemName);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setActiveItem("Bid");
+    setActiveItem(itemName); // Update the active item
   };
 
   return (
-    <div className="sticky -bottom-5 w-full z-50 h-[80px]">
-      {isModalOpen && (
-        <div
-          className="absolute bg-black/50 z-40 rounded-[2rem]"
-          onClick={closeModal}
-          aria-hidden="true"
-          style={{
-            top: "calc(-100vh + 10px)",
-            height: "calc(130vh - 100px)",
-            width: "120%",
-            left: "-10px",
-          }}
-        />
-      )}
-      <div className="max-w-[272px] mx-auto px-2 pb-0">
+    <div className="fixed bottom-2 z-50 w-full max-w-[512px] px-2">
+      <div className="relative">
         {isModalOpen && (
           <div
-            className="absolute bottom-full w-full mb-2 z-50 right-[1px]"
-            style={{ maxHeight: "calc(150vh - 100px)" }}
+            className="absolute bottom-full w-full mb-2"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div
-              className="bg-[#1a1a3a] rounded-3xl p-6 w-full modal-slide-up overflow-hidden relative"
-              style={{ maxHeight: "calc(100vh - 120px)", overflowY: "auto" }}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-2 right-2 text-white hover:text-gray-300 transition-colors"
-                aria-label="Close modal"
-              >
-                <X size={24} />
-              </button>
+            <div className="bg-[#1a1a3a] rounded-3xl p-6 w-full modal-slide-up overflow-hidden">
               <h2 className="text-center text-4xl font-bold text-white modal-fade-in">
                 {modalContent === "Redeem"
                   ? "Redeem Your Points"
@@ -100,7 +106,7 @@ export default function Navbar() {
                     <div className="flex justify-center mt-4">
                       <iframe
                         width="100%"
-                        height="180"
+                        height="315"
                         src="https://www.youtube.com/embed/uG8eWGQFwTI"
                         title="YouTube video player"
                         frameBorder="0"
@@ -118,7 +124,7 @@ export default function Navbar() {
 
         <nav
           ref={navRef}
-          className="flex h-15 items-center justify-around rounded-full border-2 border-white bg-white/10 backdrop-blur-sm"
+          className="relative flex h-20 items-center justify-around rounded-full border-2 border-white bg-white/10 backdrop-blur-sm"
         >
           {menuItems.map((item) => (
             <button
@@ -134,13 +140,28 @@ export default function Navbar() {
                 alt={`${item.name} icon`}
                 width={30}
                 height={30}
-                className="transition-transform group-hover:scale-110 w-5 h-5"
+                className="transition-transform group-hover:scale-110"
               />
-              <span className="text-[10px] mt-1">{item.name}</span>
+              <span className="text-ms mt-1">{item.name}</span>
             </button>
           ))}
+          <span
+            className="absolute h-1 rounded-full bg-white transition-all duration-300 ease-in-out"
+            style={{
+              left: `${activePosition - 5}px`,
+              width: `${activeWidth + 10}px`,
+              bottom: "0.5rem",
+            }}
+          />
         </nav>
       </div>
+
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-[-1] bg-black/50"
+          onClick={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

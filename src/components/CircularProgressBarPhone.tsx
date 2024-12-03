@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-interface CircularProgressBarProps {
+interface CircularProgressBarPhoneProps {
   progress: number;
   size?: number;
   strokeWidth?: number;
@@ -11,10 +11,10 @@ interface CircularProgressBarProps {
   textColor?: string;
 }
 
-const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
+const CircularProgressBarPhone: React.FC<CircularProgressBarPhoneProps> = ({
   progress,
-  size = 50,
-  strokeWidth = 10,
+  size = 100,
+  strokeWidth = 20,
   circleColor = "#f0f0f0",
   startColor = "#c042c7",
   endColor = "#4a0c5e",
@@ -61,7 +61,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
       </svg>
       {/* Percentage text */}
       <div
-        className="absolute inset-0 flex items-center justify-center font-bold text-sm"
+        className="absolute inset-0 flex items-center justify-center font-bold text-lg"
         style={{ color: textColor }}
         aria-live="polite"
         aria-atomic="true"
@@ -72,4 +72,4 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   );
 };
 
-export default CircularProgressBar;
+export default CircularProgressBarPhone;

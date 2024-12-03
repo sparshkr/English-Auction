@@ -1,3 +1,4 @@
+import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -14,8 +15,29 @@ export default {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
-  variants: {
-    scrollbar: ["rounded"], 
-  },
+  plugins: [
+    plugin(({ addBase, theme }) => {
+      addBase({
+        ".scrollbar": {
+          overflowY: "auto",
+          scrollbarWidth: "thin",
+          scrollbarColor: `${theme("colors.blue.600")} transparent`,
+        },
+        ".scrollbar::-webkit-scrollbar": {
+          width: "4px",
+        },
+        ".scrollbar::-webkit-scrollbar-track": {
+          background: "transparent",
+        },
+        ".scrollbar::-webkit-scrollbar-thumb": {
+          background: theme("colors.blue.600"),
+          borderRadius: "2px",
+        },
+        ".scrollbar::-webkit-scrollbar-button": {
+          display: "none",
+        },
+      });
+    }),
+  ],
 } satisfies Config;
+

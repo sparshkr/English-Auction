@@ -4,11 +4,16 @@ import React from "react";
 
 export default function Home() {
   return (
-    // <div className="flex">
-    //   <AppContent1 />
-    //   <AppContent1 />
-    //   <AppContent1 />
-    // </div>
-    <AppComponentPhone />
+    <div>
+      <div className="md:hidden">
+        <AppComponentPhone />
+      </div>
+
+      <div className="hidden md:block">
+        <AppContent1 />
+      </div>
+    </div>
+    // <Image src={Bgimg} alt="Bgimg" />
+    // <AppComponentPhone />
   );
 }

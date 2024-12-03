@@ -6,6 +6,9 @@ import InputComponent from "@/components/InputComponent";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
+// Import local image
+import Bgimg from "../../public/images/download.png";
+
 export default function AppContent1() {
   const [avatarUrls, setAvatarUrls] = useState<string[]>([]);
   const AuctionName = "English Auction";
@@ -33,13 +36,12 @@ export default function AppContent1() {
           <div
             className="relative w-full h-full bg-cover bg-center opacity-30"
             style={{
-              backgroundImage:
-                "url('https://s3-alpha-sig.figma.com/img/15cf/9786/f0907812fe039af16567486eae32c8c3?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bR~ZDVQKHtjcj2Ly7Rr1f0islF-1-rOrOADiV6xQ3zXDocPj9lYnQkX0UQK6XYxJUGdS5y6wOgMW5h3RjspZ-t~g72K0xw-LAUvQiIl0lIa~Orx4zYUgZvmwNFuZ8S9hJxFXY6iymb5QqcpsdyN6Bk2PqnzJPR2t-chGGAsBAEYlIJbwGfU6TF6rCxyNtRzFA7wCVH~LOHFJFjsVtTfsIvmuTyNUiotk30KIvMo7rrhNBuBc~-x2XSlwE0DfFRuE0WMUUw8rPK0thzuCmtr18cFxXW8rAqoT0kjWf97lQIp3LEG~ePFSQdZKezn4qae~gVr48BGswZngP~2gW8gX7g__')",
+              backgroundImage: `url(${Bgimg.src})`,
             }}
           ></div>
         </div>
 
-        <div className=" relative z-10 flex flex-col justify-center items-center px-2 pb-3">
+        <div className="relative z-10 flex flex-col justify-center items-center px-2 pb-3">
           <Topbar />
           <div className="relative text-white text-md font-bold px-4 mb-4 flex justify-between items-center py-4 w-full">
             <span>{ProductName}</span>
@@ -68,11 +70,11 @@ export default function AppContent1() {
           </div>
           <section className="mt-2 flex flex-col gap-2 mb-2 w-full">
             <h2 className="text-sm text-white">Bidders</h2>
-            <div className="flex gap-1 flex-wrap mb-auto justify-start text-sm ">
+            <div className="flex gap-1 flex-wrap mb-auto justify-start text-sm">
               {avatarUrls.map((url, index) => (
                 <Image
                   key={index}
-                  className="inline-block rounded-full  w-[30px] h-[30px]"
+                  className="inline-block rounded-full w-[30px] h-[30px]"
                   src={url}
                   alt={`Avatar ${index + 1}`}
                   width={30}
@@ -81,9 +83,7 @@ export default function AppContent1() {
               ))}
             </div>
           </section>
-          {/* <div className="relative inset-0 w-full -left-2 "> */}
           <Navbar />
-          {/* </div> */}
         </div>
       </div>
     </div>

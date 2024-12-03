@@ -24,7 +24,7 @@ const CardPhone: React.FC<CardPhoneProps> = ({ AuctionName, progress }) => {
 
           {/* Image */}
           <Image
-            src="https://api.auctionx.dev/assets/uploads/1730104758278-cropped-image-1730104757147.jpg"
+            src="/images/AirpodPro.png"
             alt="Product Img"
             width={349.17}
             height={369.49}
